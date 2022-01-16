@@ -14,3 +14,8 @@ a {
 * {
   box-sizing: border-box;
 }
+
+iframe {
+  width: 40%;
+  height: 20rem;
+}

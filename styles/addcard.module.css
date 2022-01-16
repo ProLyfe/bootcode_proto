@@ -1,0 +1,40 @@
+@font-face {
+    font-family: 'Futura';
+    src: url('../public/fonts/FuturaPTHeavy.otf');
+}
+
+.card {
+    background-color: #EAE8FB;
+    display: flex;
+    flex-direction: column;
+    width: 20rem;
+    border: dashed #707070;
+    padding: 1rem;
+    font-family: 'Futura';
+    height: 24.75rem;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.plusContainer {
+    /* background-color: red; */
+    height: 5rem;
+    width: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20rem;
+    background-color: #9390C1;
+    border: dashed #707070;
+}
+
+.plus {
+    font-size: 5rem;
+}
+
+.add {
+    /* background-color: red; */
+    text-align: center;
+}
+

@@ -8,8 +8,15 @@
     "start": "next start"
   },
   "dependencies": {
+    "cssbeautify": "^0.3.1",
+    "html-beautify": "^1.0.4",
+    "html-prettify": "^1.0.3",
+    "jsonwebtoken": "^8.5.1",
     "next": "12.0.7",
+    "pretty": "^2.0.0",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-code-prettify": "0.0.1",
+    "react-dom": "17.0.2",
+    "react-syntax-highlighter": "^15.4.5"
   }
 }

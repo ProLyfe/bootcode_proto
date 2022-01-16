@@ -1,65 +1,70 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
+import { useEffect, useState } from 'react';
+import BootCodeComponent from '../components/BootCodeCommponent';
+import jwt from 'jsonwebtoken';
+import { Prism     as SyntaxHighlighter } from 'react-syntax-highlighter';
+// import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { darcula } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import cssbeautify from 'cssbeautify';
+import Button from '../components/Button';
+import CustomInput from '../components/CustomInput';
+import Card from '../components/Card';
+import ContentContainer from '../components/ContentContainer';
+import Link from 'next/link';
+import logobootcode from '../public/logo_bootcode.svg'
+import Image from 'next/image';
+import Header from '../components/Header';
 
 export default function Home() {
+
+  const [receiveBootcodes, setReceiveBootcodes] = useState('');
+  const [user, setUser] = useState('');
+
+  useEffect(() => {
+      // window.localStorage.getItem('user');
+      const token = window.localStorage.getItem('user');
+      const decryptedToken = token ? jwt.decode(token) : 'rien';
+      setUser(decryptedToken)
+      console.log('TU VEUX QUOI ', decryptedToken)
+
+  }, []);
+
+  useEffect(() => {
+    fetch('https://bootcodedevlab.herokuapp.com/publication/all ')
+      .then(res => res.json())
+      .then(data => setReceiveBootcodes(data));
+  }, []);
+
   return (
     <div className={styles.container}>
+      <Header />
+      <ContentContainer>
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+        <h1 className={styles.titlePage}>HOME</h1>
+       <div className={styles.cardContainer}>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
+        {receiveBootcodes ? receiveBootcodes.map(({ _id, creationDate, css, html, javascript, title, tags }) => (
+          <Link href={`/communitybootcode/${_id}`} key={_id}>
+            <a>
+              <Card 
+                creationDate={creationDate.split("T")[0]}
+                css={css}
+                html={html}
+                javascript={javascript}
+                title={title}
+                _id={_id}
+                tags={tags}
+                />
+            </a>
+          </Link>
+        )) : <h1>Chargement...</h1>}
+       </div>
+    </ContentContainer>
     </div>
   )
 }
+

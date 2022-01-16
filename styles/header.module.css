@@ -1,0 +1,186 @@
+@font-face {
+    font-family: 'Futura';
+    src: url('../public/fonts/FuturaPTHeavy.otf');
+}
+
+.header {
+    /* background-color: red; */
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    /* height: 10rem; */
+}
+
+
+/* .logoboot {
+    height: 20;
+    width: 20;
+    margin-left: 10rem;
+} */
+
+.imageContainer {
+    /* background-color: green; */
+    cursor: pointer;
+    height: 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+/* .burgerContainer {
+    background-color: blue;
+} */
+
+.login {
+    display: flex;
+    width: 30rem;
+    /* background-color: palegreen; */
+    justify-content: space-evenly;
+    align-items: flex-start;
+    font-family: 'Futura';
+}
+
+.loginElementProfile {
+    font-size: 1.25rem;
+}
+
+.loginElementProfile:hover {
+    text-decoration: underline;
+}
+
+.loginElement:hover {
+    text-decoration: underline;
+}
+
+.input {
+  /* padding-left: 25px; */
+  width: 30rem;
+  /* margin-left: 10rem; */
+  margin-top: 5rem;
+  /* background-color: chartreuse; */
+  /* width: 30%; */
+  /* background: url("https://static.thenounproject.com/png/101791-200.png") no-repeat left; */
+  background: url('../public/loupe.svg') no-repeat left;
+  background-size: 4rem;
+  border: none;
+  text-align: right;
+  border-bottom: 10px solid black;
+  font-size: 3rem;
+  font-family: 'Futura';
+  position: relative;
+}
+
+.input::placeholder {
+    position: absolute;
+	bottom: 0px;
+    right: 0px;
+    color: black;
+    font-size: 3rem;
+    font-family: 'Futura';
+}
+
+.input:focus {
+    outline-style: none;
+    box-shadow: none;
+    border-color: transparent;
+    border-bottom: 10px solid black;
+}
+
+.header2 {
+    display: none;
+}
+
+.firstMobileHeader {
+    display: none;
+}
+/* 1000px */
+@media (max-width: 1000px) {
+    .input {
+        display: none;
+    }
+    .header {
+        display: none;
+    }
+    .header2 {
+        display: flex;
+        width: 100vw;
+        height: 100vh;
+        flex-direction: column;
+        background-color: white;
+        overflow-y: hidden;
+        overflow-x: hidden;
+        /* z-index: 9999; */
+    }
+    .firstMobileHeader {
+        /* background-color: black; */
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .burgerContainer {
+        /* background-color: yellow; */
+        /* color: black;
+        fill: black; */
+        cursor: pointer;
+    }
+    .secondMobileHeaderAuth {
+        display: flex;
+        /* background-color: red; */
+        justify-content: space-around;
+        font-family: 'Futura';
+        margin-top: 2rem;
+    }
+    .mobileInputContainer {
+        /* background-color: red; */
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        margin-top: 2rem;
+    }
+    .mobileInput {
+        width: 90%;
+        background: url('../public/loupe.svg') no-repeat left;
+        background-size: 3rem;
+        border: none;
+        text-align: right;
+        border-bottom: 8px solid black;
+        font-size: 2.25rem;
+        font-family: 'Futura';
+        position: relative;
+      }
+      
+      .mobileInput::placeholder {
+          position: absolute;
+          bottom: 0px;
+          right: 0px;
+          color: black;
+          font-size: 2.25rem;
+          font-family: 'Futura';
+      }
+      
+      .mobileInput:focus {
+          outline-style: none;
+          box-shadow: none;
+          border-color: transparent;
+          border-bottom: 8px solid black;
+      }
+      .modalBlanc {
+          background-color: pink;
+          z-index: 2;
+          height: 100vh;
+          width: 100vw;
+          display: none;
+      }
+      .navbarContainer {
+          /* background-color: gray; */
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: flex-end;
+          /* width: 90%; */
+          margin-right: 5%;
+      }
+}

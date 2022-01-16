@@ -1,0 +1,26 @@
+@font-face {
+    font-family: 'Futura';
+    src: url('../public/fonts/FuturaPTHeavy.otf');
+}
+
+.cardAndSupprContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.titleBootCodes {
+    font-family: 'Futura';
+}
+
+.supprimer {
+    width: 10rem;
+    margin-top: 1rem;
+    background-color: crimson;
+    border: none;
+    /* padding: 2rem */
+    height: 2.5rem;
+    color: white;
+    cursor: pointer;
+    font-family: 'Futura';
+}

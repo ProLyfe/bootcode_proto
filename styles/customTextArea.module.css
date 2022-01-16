@@ -1,0 +1,13 @@
+.customTextArea {
+    width: 100%;
+    /* height: 2.75rem; */
+    background-color: #2B2B2B;
+    border: none;
+    border-bottom: 1rem #9390C1 solid;
+    color: white;
+    margin-bottom: 2rem;
+}
+
+.customTextArea::placeholder {
+    color: white;
+}

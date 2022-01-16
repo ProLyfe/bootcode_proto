@@ -1,0 +1,43 @@
+.customTextArea {
+    width: 100%;
+    /* height: 2.75rem; */
+    background-color: #2B2B2B;
+    border: none;
+    border-bottom: 1rem #9390C1 solid;
+    color: white;
+    margin-bottom: 2rem;
+}
+
+.customTextArea::placeholder {
+    color: white;
+}
+
+.customInput {
+    width: 100%;
+    /* height: 2.75rem; */
+    background-color: #EAE8FB;
+    border: none;
+    border-bottom: 0.25rem #393939 solid;
+    color: #393939;
+    margin-bottom: 2rem;
+}
+
+.customInput::placeholder {
+    color: #393939;
+}
+
+.formContainer {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@media (max-width: 1000px) {
+    .formContainer {
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
