@@ -5,6 +5,7 @@ import styles2 from '../styles/login.module.css'
 import Button from '../components/Button';
 import Header from '../components/Header';
 import Router from 'next/router';
+import Footer from '../components/Footer';
 
 const Register = () => {
 
@@ -41,7 +42,7 @@ const Register = () => {
     return (
         <div className={styles.container}>
             <Head>
-                <title>Create Next App</title>
+                <title>BootCode</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head> 
             <Header />
@@ -53,6 +54,7 @@ const Register = () => {
                 {/* <button>Valider</button> */}
                 <Button title="S'inscrire"/>
             </form>
+            <Footer />
       </div>
     );
 };

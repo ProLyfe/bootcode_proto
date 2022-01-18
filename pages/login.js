@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import styles2 from '../styles/login.module.css'
 import Button from '../components/Button';
 import Router from 'next/router';
+import Footer from '../components/Footer';
 
 const Login = () => {
 
@@ -35,7 +36,7 @@ const Login = () => {
     return (
         <div className={styles.container}>
             <Head>
-                <title>Create Next App</title>
+                <title>BootCode</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head> 
             <Header />
@@ -45,6 +46,7 @@ const Login = () => {
                 <input type="password" placeholder="password" style={{ height: '2.75rem' }} className={styles2.customInput}  onChange={(e) => setPassword(e.target.value)}/><br />
                 <Button title="Se connecter"/>
             </form>
+            <Footer />
       </div>
     );
 };

@@ -15,6 +15,7 @@ import Link from 'next/link';
 import logobootcode from '../public/logo_bootcode.svg'
 import Image from 'next/image';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 export default function Home() {
 
@@ -41,13 +42,13 @@ export default function Home() {
       <Header />
       <ContentContainer>
       <Head>
-        <title>Create Next App</title>
+        <title>BootCode</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
         <h1 className={styles.titlePage}>HOME</h1>
        <div className={styles.cardContainer}>
 
-        {receiveBootcodes ? receiveBootcodes.map(({ _id, creationDate, css, html, javascript, title, tags }) => (
+        {receiveBootcodes ? receiveBootcodes.reverse().map(({ _id, creationDate, css, html, javascript, title, tags }) => (
           <Link href={`/communitybootcode/${_id}`} key={_id}>
             <a>
               <Card 
@@ -64,6 +65,7 @@ export default function Home() {
         )) : <h1>Chargement...</h1>}
        </div>
     </ContentContainer>
+    <Footer />
     </div>
   )
 }

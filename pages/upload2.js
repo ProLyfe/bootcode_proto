@@ -11,6 +11,8 @@ import { Prism     as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { darcula } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import cssbeautify from 'cssbeautify';
 import { useEffect } from 'react/cjs/react.development';
+import Router from 'next/router';
+import Link from 'next/link';
 
 const Upload = () => {
 
@@ -19,7 +21,8 @@ const Upload = () => {
     const [isSelected3, setIsSelected3] = useState(false);
 
     const [author, setAuthor] = useState('');
- 
+    
+    const [isSuccess, setIsSuccess] = useState(false);
 
     // console.log('data :', data)
 
@@ -41,9 +44,9 @@ const Upload = () => {
 
     };
 
-    const activated = isSelected === true ? '#9390C1' : '#EAE8FB'
-    const activated2 = isSelected2 === true ? '#9390C1' : '#EAE8FB'
-    const activated3 = isSelected3 === true ? '#9390C1' : '#EAE8FB'
+    const activated = isSelected === true ? '#9390C1' : '#EAE8FB';
+    const activated2 = isSelected2 === true ? '#9390C1' : '#EAE8FB';
+    const activated3 = isSelected3 === true ? '#9390C1' : '#EAE8FB';
     
     const [title, setTitle] = useState('');
     const [desc, setDesc] = useState('');
@@ -52,6 +55,44 @@ const Upload = () => {
     const [javascript, setJavascript] = useState('');
 
     const [addTag, setAddTag] = useState([]);
+
+    const [tag1, setTag1] = useState(false);
+    const [tag2, setTag2] = useState(false);
+    const [tag3, setTag3] = useState(false);
+    const [tag4, setTag4] = useState(false);
+    const [tag5, setTag5] = useState(false);
+
+    const tag1Style = tag1 ? { backgroundColor: '#2B2B2B', color: 'white' } : { backgroundColor: '#9390C1 '} 
+    const tag2Style = tag2 ? { backgroundColor: '#2B2B2B', color: 'white' } : { backgroundColor: '#9390C1 '} 
+    const tag3Style = tag3 ? { backgroundColor: '#2B2B2B', color: 'white' } : { backgroundColor: '#9390C1 '} 
+    const tag4Style = tag4 ? { backgroundColor: '#2B2B2B', color: 'white' } : { backgroundColor: '#9390C1 '} 
+    const tag5Style = tag5 ? { backgroundColor: '#2B2B2B', color: 'white' } : { backgroundColor: '#9390C1 '} 
+
+    const handleTag1 = () => {
+        setAddTag(prev => [...prev, 'MATERIAL']);
+        setTag1(prevState => !prevState);
+    };
+
+    const handleTag2 = () => {
+        setAddTag(prev => [...prev, 'ELEGENT']);
+        setTag2(prevState => !prevState);
+    };
+
+    const handleTag3 = () => {
+        setAddTag(prev => [...prev, 'FLAT DESIGN']);
+        setTag3(prevState => !prevState);
+    };
+
+    const handleTag4 = () => {
+        setAddTag(prev => [...prev, 'ORIGINAL']);
+        setTag4(prevState => !prevState);
+    };
+
+    const handleTag5 = () => {
+        setAddTag(prev => [...prev, 'MODERN']);
+        setTag5(prevState => !prevState);
+    };
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -78,22 +119,26 @@ const Upload = () => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(code)
-        })
-
-
-        console.log(code)
+        }).then(res => setIsSuccess(true));
+        // console.log(code)
     };
 
     return (
         <div className={styles.container}>
             <Head>
-                <title>Create Next App</title>
+                <title>BootCode</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head> 
             <Header />
             <h1>Envoi du code</h1>
-            <div className={styles.back}><p className={styles.backPara}>Retour</p></div>
+            {/* <h1 className={styles.titlePage}>HOME</h1> */}
+            <div className={styles.back} onClick={Router.back}><p className={styles.backPara}>Retour</p></div>
             
+            {isSuccess ? (
+                <div className={styles.successUpload}>
+                    <p>Félicitation ! Votre BootCode a été publié : <Link href="/profile"><span className={styles.successUploadSpan}>Voir mes récents BootCodes :</span></Link></p>
+                </div>
+            ) : null}
 
             <form className={styles.bootcodeContainer} onSubmit={handleSubmit}>
                 <div className={styles.bootcodeRender}>
@@ -110,11 +155,11 @@ const Upload = () => {
                     <div className={styles.cardCategoriesContainer}>
                         {/* <p className={styles.cardCategorie}>NAV</p>
                         <p className={styles.cardCategorie}>FLAT DESIGN</p> */}
-                        <p className={styles.cardCategorie} onClick={() => setAddTag(prev => [...prev, 'MATERIAL'])}>MATERIAL UI</p>
-                        <p className={styles.cardCategorie} onClick={() => setAddTag(prev => [...prev, 'ELEGENT'])}>ELEGENT</p>
-                        <p className={styles.cardCategorie} onClick={() => setAddTag(prev => [...prev, 'FLAT DESIGN'])}>FLAT DESGIN</p>
-                        <p className={styles.cardCategorie} onClick={() => setAddTag(prev => [...prev, 'ORIGINAL'])}>ORIGINAL</p>
-                        <p className={styles.cardCategorie} onClick={() => setAddTag(prev => [...prev, 'MODERN'])}>MODERN</p>
+                        <p className={styles.cardCategorie} style={tag1Style} onClick={handleTag1}>MATERIAL UI</p>
+                        <p className={styles.cardCategorie} style={tag2Style} onClick={handleTag2}>ELEGENT</p>
+                        <p className={styles.cardCategorie} style={tag3Style} onClick={handleTag3}>FLAT DESGIN</p>
+                        <p className={styles.cardCategorie} style={tag4Style} onClick={handleTag4}>ORIGINAL</p>
+                        <p className={styles.cardCategorie} style={tag5Style} onClick={handleTag5}>MODERN</p>
                     </div>
                     <br />
                     <Button title="ENVOYER SON BOOTCODE"/>
@@ -129,11 +174,11 @@ const Upload = () => {
                             <div className={styles.langugage} style={{ backgroundColor: activated2 }} onClick={() => handleSelection('second')}>CSS</div>
                             <div className={styles.langugage} style={{ backgroundColor: activated3 }} onClick={() => handleSelection('third')}>JS</div>
                         </div>
-                        { isSelected ? <textarea className={styles.snippet} placeholder="Collez votre code HTML"value={html} onChange={e => setHtml(e.target.value)}></textarea>
+                        { isSelected ? <textarea className={styles.snippet} placeholder="Collez votre code HTML" value={html} onChange={e => setHtml(e.target.value)}></textarea>
 
-                        : isSelected2 ? <textarea className={styles.snippet} placeholder="Collez votre code CSS"value={css} onChange={e => setCss(e.target.value)}></textarea>
+                        : isSelected2 ? <textarea className={styles.snippet} placeholder="Collez votre code CSS" value={css} onChange={e => setCss(e.target.value)}></textarea>
 
-                        : <textarea className={styles.snippet} placeholder="Collez votre code JavaScript"value={javascript} onChange={e => setJavascript(e.target.value)}></textarea>
+                        : <textarea className={styles.snippet} placeholder="Collez votre code JavaScript" value={javascript} onChange={e => setJavascript(e.target.value)}></textarea>
                         }
                     </div>
                 </div>

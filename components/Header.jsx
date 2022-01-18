@@ -21,7 +21,7 @@ const Header = () => {
 
     const handleLogout = () => {
         localStorage.removeItem('user');
-        Router.reload(window.location.pathname);
+        window.location.pathname === '/' ? Router.reload(window.location.pathname) : Router.push('/')
     };
 
     useEffect(() => {
@@ -68,9 +68,11 @@ const Header = () => {
         {/* MOBILE HEADER */}
         
         <div className={styles.firstMobileHeader}>
-            <div className={styles.imageContainer}>
-                <Image src={logobootcode} height={120} width={120} className={styles.logoboot}/>
-            </div>
+            <Link href="/">
+                <div className={styles.imageContainer}>
+                    <Image src={logobootcode} height={120} width={120} className={styles.logoboot}/>
+                </div>
+            </Link>
             <div className={styles.burgerContainer} onClick={toggleMenu}>
                 <Image src={burger} height={30} width={30} color='black'/>
             </div>
@@ -96,8 +98,8 @@ const Header = () => {
                 <input type="text" className={styles.mobileInput} placeholder="Rechercher"/>
             </div>
             <div className={styles.navbarContainer}>
-                <h1 className={styles.titlePage}>HOME</h1>
-                <h1 className={styles.titlePage}>NOUS CONTACTER</h1>
+                <Link href="/"><a><h1 className={styles.titlePage}>HOME</h1></a></Link>
+                <Link href="/contact"><a><h1 className={styles.titlePage}>NOUS CONTACTER</h1></a></Link>
             </div>
         </div> : <span></span>}
         {/* <div className={styles.header2}>

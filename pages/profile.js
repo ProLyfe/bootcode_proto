@@ -47,7 +47,7 @@ const Profile = () => {
         const decryptedToken = token ? jwt.decode(token) : 'rien';
         console.log('Mon user', decryptedToken)
 
-        fetch(`https://bootcodedevlab.herokuapp.com/publication/${decryptedToken._id}/post`)
+        decryptedToken && fetch(`https://bootcodedevlab.herokuapp.com/publication/${decryptedToken._id}/post`)
             .then(res => res.json())
             .then(data => setUserPosts(data))
 
@@ -64,7 +64,7 @@ const Profile = () => {
     return (
         <div className={styles.container}>
             <Head>
-                <title>Create Next App</title>
+                <title>BootCode</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head> 
             <Header />

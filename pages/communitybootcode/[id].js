@@ -60,7 +60,7 @@ const BootCodeDetails = ({ data }) => {
                     <div className={styles.cardCategoriesContainer}>
                         {/* <p className={styles.cardCategorie}>NAV</p>
                         <p className={styles.cardCategorie}>FLAT DESIGN</p> */}
-                        {data.tags.map(tag => <p className={styles.cardCategorie}>{tag.toUpperCase()}</p>)}
+                        {data.tags.map(tag => <p key={Math.random()} className={styles.cardCategorie}>{tag.toUpperCase()}</p>)}
                     </div>
                 </div>
                 <div className={styles.bootcodeCode}>

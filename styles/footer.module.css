@@ -1,0 +1,19 @@
+.footer {
+    background-color: #282C34;
+    height: 4rem;
+    color: white;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    font-family: 'Futura';
+}
+
+.footerContact {
+    text-decoration: underline;
+    cursor: pointer;
+}
