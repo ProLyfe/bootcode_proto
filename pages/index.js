@@ -40,6 +40,7 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Header />
+      <div style={{ backgroundColor: '#FBFAFE', display: 'flex', justifyContent: 'center'}}>
       <ContentContainer>
       <Head>
         <title>BootCode</title>
@@ -65,6 +66,7 @@ export default function Home() {
         )) : <h1>Chargement...</h1>}
        </div>
     </ContentContainer>
+       </div>
     <Footer />
     </div>
   )

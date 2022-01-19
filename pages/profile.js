@@ -67,7 +67,12 @@ const Profile = () => {
                 <title>BootCode</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head> 
+            {/* <Confetti
+                // width='100vw'
+                // height={height}
+                /> */}
             <Header />
+            {/* <div style={{ backgroundColor: '#FBFAFE', display: 'flex', justifyContent: 'center'}}> */}
             <ContentContainer>
 
             <h1 className={styles.titlePage}>Profil</h1>
@@ -111,6 +116,7 @@ const Profile = () => {
                 />
             )) : <h1>Loading....</h1>} */}
             </ContentContainer>
+            {/* </div> */}
       </div>
     );
 };

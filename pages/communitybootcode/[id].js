@@ -6,6 +6,7 @@ import cssbeautify from 'cssbeautify';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router'
 import htmlBeautify from 'html-beautify'
+import Router from 'next/router';
 
 const BootCodeDetails = ({ data }) => {
     
@@ -51,12 +52,12 @@ const BootCodeDetails = ({ data }) => {
     return (
         <div className={styles.container}>
             <Header />
-            <div className={styles.back}><p className={styles.backPara}>Retour</p></div>
+            <div className={styles.back} onClick={Router.back}><p className={styles.backPara}>Retour</p></div>
             <div className={styles.bootcodeContainer}>
                 <div className={styles.bootcodeRender}>
                     <p className={styles.date}>01.01.2022</p>
                     <p className={styles.desc}>{data.title} par {author}</p>
-                     <iframe src={`./frame/${data._id}`} title="description" scrolling="no" className={styles.iframe}></iframe>
+                     <iframe style={{ backgroundColor: 'white'}} src={`./frame/${data._id}`} title="description" scrolling="no" className={styles.iframe}></iframe>
                     <div className={styles.cardCategoriesContainer}>
                         {/* <p className={styles.cardCategorie}>NAV</p>
                         <p className={styles.cardCategorie}>FLAT DESIGN</p> */}

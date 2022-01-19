@@ -13,6 +13,7 @@ import cssbeautify from 'cssbeautify';
 import { useEffect } from 'react/cjs/react.development';
 import Router from 'next/router';
 import Link from 'next/link';
+import Confetti from 'react-confetti'
 
 const Upload = () => {
 
@@ -97,6 +98,7 @@ const Upload = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        setIsSuccess(true);
         const filteredTags = Array.from(new Set(addTag));
         console.log(filteredTags)
         const code = {
@@ -105,7 +107,7 @@ const Upload = () => {
             html,
             css,
             javascript,
-            tags: ['Material UI', 'Flat Design', 'Modern']
+            tags: filteredTags
         };
 
         const token = window.localStorage.getItem('user');
@@ -119,7 +121,8 @@ const Upload = () => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(code)
-        }).then(res => setIsSuccess(true));
+        })
+        // .then(res => setIsSuccess(true));
         // console.log(code)
     };
 
@@ -137,6 +140,7 @@ const Upload = () => {
             {isSuccess ? (
                 <div className={styles.successUpload}>
                     <p>Félicitation ! Votre BootCode a été publié : <Link href="/profile"><span className={styles.successUploadSpan}>Voir mes récents BootCodes :</span></Link></p>
+                    <Confetti />
                 </div>
             ) : null}
 
