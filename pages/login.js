@@ -43,7 +43,7 @@ const Login = () => {
             <h1 className={styles.titlePage}>CONNEXION</h1>
             <form onSubmit={handleSubmit} className={styles2.formContainer}>
                 <input type="text" placeholder="Email" style={{ height: '2.75rem' }} className={styles2.customInput} onChange={(e) => setEmail(e.target.value)}/><br />
-                <input type="password" placeholder="password" style={{ height: '2.75rem' }} className={styles2.customInput}  onChange={(e) => setPassword(e.target.value)}/><br />
+                <input type="password" placeholder="Mot de passe" style={{ height: '2.75rem' }} className={styles2.customInput}  onChange={(e) => setPassword(e.target.value)}/><br />
                 <Button title="Se connecter"/>
             </form>
             <Footer />

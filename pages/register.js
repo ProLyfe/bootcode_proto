@@ -50,7 +50,7 @@ const Register = () => {
             <form onSubmit={handleSubmit} className={styles2.formContainer}>
                 <input type="text" placeholder="Email" className={styles2.customInput} style={{ height: '2.75rem' }} onChange={(e) => setEmail(e.target.value)}/><br />
                 <input type="text" placeholder="Username" className={styles2.customInput} style={{ height: '2.75rem' }} onChange={(e) => setUsername(e.target.value)}/><br />
-                <input type="password" placeholder="password" className={styles2.customInput} style={{ height: '2.75rem' }} onChange={(e) => setPassword(e.target.value)}/><br />
+                <input type="password" placeholder="Mot de passe" className={styles2.customInput} style={{ height: '2.75rem' }} onChange={(e) => setPassword(e.target.value)}/><br />
                 {/* <button>Valider</button> */}
                 <Button title="S'inscrire"/>
             </form>

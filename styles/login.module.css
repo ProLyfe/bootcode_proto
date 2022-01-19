@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Futura';
+    src: url('../public/fonts/FuturaPTHeavy.otf');
+}
+
 .customTextArea {
     width: 100%;
     /* height: 2.75rem; */
@@ -10,6 +15,7 @@
 
 .customTextArea::placeholder {
     color: white;
+    font-family: 'Futura';
 }
 
 .customInput {
@@ -20,10 +26,12 @@
     border-bottom: 0.25rem #393939 solid;
     color: #393939;
     margin-bottom: 2rem;
+    font-family: 'Futura';
 }
 
 .customInput::placeholder {
     color: #393939;
+    font-family: 'Futura';
 }
 
 .formContainer {
