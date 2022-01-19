@@ -92,6 +92,39 @@
     color: rgba(0, 0, 0, 0.336);
 }
 
+.searchContainer {
+    position: relative;
+    /* background-color: red; */
+}
+
+.resultContainer {
+    position: absolute;
+    width: 100%; 
+}
+
+.inputResults {
+    background-color: #9390C1;
+    height: 2.75rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Futura';
+    color: whitesmoke;
+    border-bottom: black 2px solid;
+    cursor: pointer;
+    /* z-index: 999;
+    position: absolute;
+    flex-direction: column; */
+}
+
+.inputResults:hover {
+    background-color: #afaae9;
+}
+
+.inputResultsPara:hover {
+    text-decoration: underline;
+}
+
 .header2 {
     display: none;
 }

@@ -15,6 +15,9 @@ const Header = () => {
     const [decryptedTokenState, setDecryptedToken] = useState('');
     const [decryptedTokenStateName, setDecryptedTokenName] = useState('');
 
+    const [searchList, setSearchList] = useState([]);
+    const [filteredSearchList, setFilteredSearchList] = useState([]);
+
     const toggleMenu = () => {
         setIsMenuToggled(prev => !prev);
     };
@@ -25,6 +28,12 @@ const Header = () => {
     };
 
     useEffect(() => {
+        fetch('https://bootcodedevlab.herokuapp.com/publication/all ')
+          .then(res => res.json())
+          .then(data => setSearchList(data));
+      }, []);
+
+    useEffect(() => {
         // window.localStorage.getItem('user');
         const token = window.localStorage.getItem('user');
         const decryptedToken = token ? jwt.decode(token) : 'rien';
@@ -32,8 +41,23 @@ const Header = () => {
         setDecryptedToken(decryptedToken)
         decryptedToken && setDecryptedTokenName(decryptedToken.username)
         console.log('TU VEUX QUOI ?', decryptedToken)
-  
     }, []);
+
+
+    const handleSearchResult = (val) => {
+            const filteredResult = searchList.filter(singleResult => singleResult.title.toLowerCase().includes(val.toLowerCase()))
+            
+            if (val.length !== 0) {
+                setFilteredSearchList(filteredResult);
+                console.log('plein')
+            } else if (val.length === 0) {
+                setFilteredSearchList([])
+                console.log('vide')
+
+            }
+            // console.log(val.length)
+
+    };
 
     return (
         <>
@@ -46,7 +70,19 @@ const Header = () => {
             {/* <div className={styles.burgerContainer}>
                 <Image src={burger} height={30} width={30} color='black'/>
             </div> */}
-            <input type="text" className={styles.input} placeholder="Rechercher"/>
+            <div className={styles.searchContainer}>
+                <input type="text" className={styles.input} placeholder="Rechercher" onChange={(e) => handleSearchResult(e.target.value)}/>
+                {/* <div className={styles.inputResults}><p>bonjour</p></div> */}
+                
+              
+                <div className={styles.resultContainer}>
+                    {searchList ? filteredSearchList.map(result => <Link href={`/communitybootcode/${result._id}`} key={result._id}><div className={styles.inputResults}><p className={styles.inputResultsPara}>{result.title}</p></div></Link>): null}
+                </div>
+        
+             {/* <div className={styles.resultContainer}>
+                 {searchList ? filteredSearchList.map(result => <Link href={`/communitybootcode/${result._id}`} key={result._id}><div className={styles.inputResults}><p className={styles.inputResultsPara}>{result.title}</p></div></Link>): null}
+             </div> */}
+            </div>
             <ul className={styles.login}>
                 {decryptedTokenStateName ? 
                 <>
