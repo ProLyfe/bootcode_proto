@@ -55,7 +55,19 @@ const BootCodeDetails = ({ data }) => {
             <div className={styles.back} onClick={Router.back}><p className={styles.backPara}>Retour</p></div>
             <div className={styles.bootcodeContainer}>
                 <div className={styles.bootcodeRender}>
-                    <p className={styles.date}>01.01.2022</p>
+                    <p className={styles.date}>
+                        {/* 01.01.2022 */}
+                        {data.creationDate ? data.creationDate.split('')[8] : ''}
+                        {data.creationDate ? data.creationDate.split('')[9] : ''}
+                        .
+                        {data.creationDate ? data.creationDate.split('')[5] : ''}
+                        {data.creationDate ? data.creationDate.split('')[6] : ''}
+                        .
+                        {data.creationDate ? data.creationDate.split('')[0] : ''}
+                        {data.creationDate ? data.creationDate.split('')[1] : ''}
+                        {data.creationDate ? data.creationDate.split('')[2] : ''}
+                        {data.creationDate ? data.creationDate.split('')[3] : ''}
+                    </p>
                     <p className={styles.desc}>{data.title} par {author}</p>
                      <iframe style={{ backgroundColor: 'white'}} src={`./frame/${data._id}`} title="description" scrolling="no" className={styles.iframe}></iframe>
                     <div className={styles.cardCategoriesContainer}>

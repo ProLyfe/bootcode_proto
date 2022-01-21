@@ -12,8 +12,12 @@ const Contact = () => {
     const [objet, setObjet] = useState('');
     const [message, setMessage] = useState('');
 
+    const [isSuccess, setIsSuccess] = useState(false);
+
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        setIsSuccess(true)
 
         const contactMessage = {
             mail: email,
@@ -53,6 +57,12 @@ const Contact = () => {
                     ></textarea>
                 <Button title="Envoyer"/>
             </form>
+                    <br />
+                    {isSuccess ? (
+                    <div className={styles2.successUpload}>
+                        <p className={styles2.successUploadSpan}>Félicitation ! Votre BootCode a été publié</p>
+                    </div>
+                    ) : null}
       </div>
     );
 };
