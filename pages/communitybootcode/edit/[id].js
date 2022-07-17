@@ -1,24 +1,17 @@
+import Header from "../../../components/Header";
+import styles from '../../../styles/bootcodepage.module.css';
+import Router from 'next/router';
+import jwt from 'jsonwebtoken';
+import Button from "../../../components/Button";
 import Head from 'next/head'
 import { useState, useContext } from 'react';
-import jwt from 'jsonwebtoken';
-import Header from '../components/Header';
-import styles from '../styles/upload2.module.css';
-import CustomInput from '../components/CustomInput'
-import CustomTextArea from '../components/CustomTextArea';
-import Button from '../components/Button';
-import htmlBeautify from 'html-beautify'
-import { Prism     as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { darcula } from 'react-syntax-highlighter/dist/cjs/styles/prism';
-import cssbeautify from 'cssbeautify';
-import { useEffect } from 'react/cjs/react.development';
-import Router from 'next/router';
+// import styles from '../../styles/upload2.module.css';
 import Link from 'next/link';
 import Confetti from 'react-confetti'
-// import { useRouter } from 'next/router'
-import { BootCodeContext } from '../pages/_app'; 
+import { BootCodeContext } from '../../../pages/_app'; 
 
-const Upload = () => {
-
+const BootCodeDetails = ({ data }) => {
+    
     const [isSelected, setIsSelected] = useState(true);
     const [isSelected2, setIsSelected2] = useState(false);
     const [isSelected3, setIsSelected3] = useState(false);
@@ -158,6 +151,8 @@ const Upload = () => {
         // console.log('yanny : ', bootCodePreview)
     };
 
+    console.log('YANNY A DIT : ', data);
+
     return (
         <div className={styles.container}>
             <Head>
@@ -213,11 +208,11 @@ const Upload = () => {
                             <div className={styles.langugage} style={{ backgroundColor: activated2 }} onClick={() => handleSelection('second')}>CSS</div>
                             <div className={styles.langugage} style={{ backgroundColor: activated3 }} onClick={() => handleSelection('third')}>JS</div>
                         </div>
-                        { isSelected ? <textarea className={styles.snippet} placeholder="Collez votre code HTML" value={html} onChange={e => {setHtml(() => e.target.value);}} onKeyUp={formatBootCode}></textarea>
+                        { isSelected ? <textarea className={styles.snippet} placeholder="Collez votre code HTML" defaultValue={data.html} onChange={e => {setHtml(() => e.target.value);}} onKeyUp={formatBootCode}></textarea>
 
-                        : isSelected2 ? <textarea className={styles.snippet} placeholder="Collez votre code CSS" value={css} onChange={e => {setCss(() => e.target.value);}} onKeyUp={formatBootCode}></textarea>
+                        : isSelected2 ? <textarea className={styles.snippet} placeholder="Collez votre code CSS" defaultValue={data.css} onChange={e => {setCss(() => e.target.value);}} onKeyUp={formatBootCode}></textarea>
 
-                        : <textarea className={styles.snippet} placeholder="Collez votre code JavaScript" value={javascript} onChange={e => {setJavascript(() => e.target.value);}} onKeyUp={formatBootCode}></textarea>
+                        : <textarea className={styles.snippet} placeholder="Collez votre code JavaScript" defaultValue={data.javascript} onChange={e => {setJavascript(() => e.target.value);}} onKeyUp={formatBootCode}></textarea>
                         }
                     </div>
                 </div>
@@ -260,5 +255,19 @@ const Upload = () => {
     );
 };
 
-export default Upload;
+export default BootCodeDetails;
+
+export async function getServerSideProps(context) {
+    const { params } = context;
+    const { id } = params;
+
+    const res = await fetch(`https://bootcodedevlab.herokuapp.com/publication/${id}`);
+    const data = await res.json();
+ 
+    return {
+        props: {
+            data: data
+        }
+    };
+};
 

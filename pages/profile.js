@@ -98,6 +98,7 @@ const Profile = () => {
                     </a>
                 </Link>
                 <button onClick={() => handleDelete(_id)} className={styles2.supprimer}>Supprimer</button>
+                <button onClick={() => handleDelete(_id)} className={styles2.modifier}>Modifier</button>
             </div>
         )) : <h1>Chargement...</h1>}
 

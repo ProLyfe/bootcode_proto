@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import jwt from 'jsonwebtoken';
 import Router from 'next/router'
-
+import { useRouter } from 'next/router'
 
 const Header = () => {
 
@@ -18,6 +18,13 @@ const Header = () => {
     const [searchList, setSearchList] = useState([]);
     const [filteredSearchList, setFilteredSearchList] = useState([]);
 
+    // const [isUploadPage, setIsUploadPage] = useState(false);
+
+    const router = useRouter();
+    // console.log('router test:', router.pathname === '/upload2')
+
+    
+  
     const toggleMenu = () => {
         setIsMenuToggled(prev => !prev);
     };
@@ -70,20 +77,21 @@ const Header = () => {
             {/* <div className={styles.burgerContainer}>
                 <Image src={burger} height={30} width={30} color='black'/>
             </div> */}
-            <div className={styles.searchContainer}>
-                <input type="text" className={styles.input} placeholder="Rechercher" onChange={(e) => handleSearchResult(e.target.value)}/>
-                {/* <div className={styles.inputResults}><p>bonjour</p></div> */}
-                
-              
-                <div className={styles.resultContainer}>
-                    {searchList ? filteredSearchList.map(result => <Link href={`/communitybootcode/${result._id}`} key={result._id}><div className={styles.inputResults}><p className={styles.inputResultsPara}>{result.title}</p></div></Link>): null}
+
+            {router.pathname !== '/upload2' ? (
+                <div className={styles.searchContainer}>
+                    <input type="text" className={styles.input} placeholder="Rechercher" onChange={(e) => handleSearchResult(e.target.value)}/>
+                    <div className={styles.resultContainer}>
+                        {searchList ? filteredSearchList.map(result => <Link href={`/communitybootcode/${result._id}`} key={result._id}><div className={styles.inputResults}><p className={styles.inputResultsPara}>{result.title}</p></div></Link>): null}
+                    </div>
                 </div>
-        
-             {/* <div className={styles.resultContainer}>
-                 {searchList ? filteredSearchList.map(result => <Link href={`/communitybootcode/${result._id}`} key={result._id}><div className={styles.inputResults}><p className={styles.inputResultsPara}>{result.title}</p></div></Link>): null}
-             </div> */}
-            </div>
+
+            ) : null}
+
+
+
             <ul className={styles.login}>
+                {console.log('decryptedTokenStateName :', decryptedTokenStateName)}
                 {decryptedTokenStateName ? 
                 <>
                     <Link href="/profile"><a className={styles.loginElementProfile}>Bonjour {decryptedTokenState.username} !</a></Link>

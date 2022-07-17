@@ -7,6 +7,8 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router'
 import htmlBeautify from 'html-beautify'
 import Router from 'next/router';
+import jwt from 'jsonwebtoken';
+import Button from "../../components/Button";
 
 const BootCodeDetails = ({ data }) => {
     
@@ -41,14 +43,56 @@ const BootCodeDetails = ({ data }) => {
     const activated2 = isSelected2 === true ? '#9390C1' : '#EAE8FB'
     const activated3 = isSelected3 === true ? '#9390C1' : '#EAE8FB'
 
+    const [decryptedTokenId, setDecryptedTokenId] = useState();
 
     useEffect(() => {
+        const token = window.localStorage.getItem('user');
+        const decryptedToken = token ? jwt.decode(token) : 'rien';
+        setDecryptedTokenId(decryptedToken._id);
+    
         fetch(`https://bootcodedevlab.herokuapp.com/auth/${data.author}`)
             .then(res => res.json())
             .then(bootcodeAuthor => setAuthor(bootcodeAuthor.username))
     }, []);
 
+    // const token = window.localStorage.getItem('user');
+    // const decryptedToken = token ? jwt.decode(token) : 'rien';
+    // const decryptedTokenId = decryptedToken._id
 
+    const handleLike = (tokenId) => {
+        fetch(`https://bootcodedevlab.herokuapp.com/publication/${tokenId}/${data._id}/like`, {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }).then(() => location.reload());
+    };
+
+    const handleUnLike = (tokenId) => {
+        fetch(`https://bootcodedevlab.herokuapp.com/publication/${tokenId}/${data._id}/unlike`, {
+            method: 'DELETE',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }).then(() => location.reload());
+    }
+
+    const [bootCodeComment, setBootCodeComment] = useState('');
+
+    const handleComments = (message, tokenId) => {
+        fetch(`https://bootcodedevlab.herokuapp.com/comment/${tokenId}/${data._id}/post`, {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ message }),
+        }).then(() => console.log('comment send')).catch(err => console.log(err));
+    };
+
+    console.log('DATA :', data);
     return (
         <div className={styles.container}>
             <Header />
@@ -73,7 +117,17 @@ const BootCodeDetails = ({ data }) => {
                     <div className={styles.cardCategoriesContainer}>
                         {/* <p className={styles.cardCategorie}>NAV</p>
                         <p className={styles.cardCategorie}>FLAT DESIGN</p> */}
-                        {data.tags.map(tag => <p key={Math.random()} className={styles.cardCategorie}>{tag.toUpperCase()}</p>)}
+                        <div className={styles.tagContainer}>
+                            {data.tags.map(tag => <p key={Math.random()} className={styles.cardCategorie}>{tag.toUpperCase()}</p>)}
+                        </div>
+                        
+                        <div className={styles.coeurContainer}>
+                            {
+                                data.likes.includes(decryptedTokenId) ? 
+                                <button className={styles.coeurButton} onClick={() => handleUnLike(decryptedTokenId)}><img src="/coeur.png" className={styles.coeur}/></button>  :
+                                <button className={styles.coeurButton} onClick={() => handleLike(decryptedTokenId)}><img src="/coeurvide.png" className={styles.coeur}/></button>
+                            }
+                        </div>
                     </div>
                 </div>
                 <div className={styles.bootcodeCode}>
@@ -131,11 +185,21 @@ const BootCodeDetails = ({ data }) => {
                             openbrace: 'separate-line',
                             autosemicolon: true })}
                         </SyntaxHighlighter>
-                        
-                        
-                        }
+
+
+}
                     </div>
+                    <ul className={styles.commentsListContainer}>
+                        {data.comment.map((singleComment, index) => (
+                            <li className={styles.singleComment} key={index}>{singleComment.author.username} | {singleComment.message}</li>
+                        ))}
+                    </ul>
                 </div>
+            </div>
+            
+            <div className={styles.bootcodeContainer2}>
+                <textarea className={styles.commentTextArea} placeholder="Envoyer un commentaire" onChange={e => setBootCodeComment(e.target.value)}></textarea>
+                <button className={styles.commentButton} onClick={() => handleComments(bootCodeComment, decryptedTokenId)}>Envoyer</button>
             </div>
         </div>
     );

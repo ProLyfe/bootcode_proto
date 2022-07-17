@@ -25,3 +25,15 @@
     font-family: 'Futura';
     margin-bottom: 1rem;
 }
+
+.modifier {
+    width: 10rem;
+    /* margin-top: 1rem; */
+    background-color: #21897E;
+    border: none;
+    height: 2.5rem;
+    color: white;
+    cursor: pointer;
+    font-family: 'Futura';
+    margin-bottom: 1rem;
+}
