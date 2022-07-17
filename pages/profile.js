@@ -28,16 +28,18 @@ const Profile = () => {
         //         // bootcodeAuthor.email
         //     })
 
-        console.log('deletedId', id)
-
-        fetch(`https://bootcodedevlab.herokuapp.com/publication/${id}`, {
+        // console.log('deletedId user', id, user._id)
+// `https://bootcodedevlab.herokuapp.com/publication/${id user}/${id publication}`
+        fetch(`https://bootcodedevlab.herokuapp.com/publication/${user._id}/${id}`, {
             method: 'DELETE',
             // mode: 'cors',
             // headers: {
             //     'Content-Type': 'application/json'
             // },  
             // body: JSON.stringify(id)
-        }).then(() => location.reload()) 
+        })
+        .then(() => location.reload()) 
+        .catch(err => console.log('err', err))
 };
 
 
@@ -98,7 +100,7 @@ const Profile = () => {
                     </a>
                 </Link>
                 <button onClick={() => handleDelete(_id)} className={styles2.supprimer}>Supprimer</button>
-                <button onClick={() => handleDelete(_id)} className={styles2.modifier}>Modifier</button>
+                <button onClick={() => console.log('modifier')} className={styles2.modifier}>Modifier</button>
             </div>
         )) : <h1>Chargement...</h1>}
 

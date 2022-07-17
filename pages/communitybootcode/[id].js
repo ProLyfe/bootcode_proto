@@ -52,7 +52,7 @@ const BootCodeDetails = ({ data }) => {
     
         fetch(`https://bootcodedevlab.herokuapp.com/auth/${data.author}`)
             .then(res => res.json())
-            .then(bootcodeAuthor => setAuthor(bootcodeAuthor.username))
+            .then(bootcodeAuthor => setAuthor(bootcodeAuthor[0].username))
     }, []);
 
     // const token = window.localStorage.getItem('user');
