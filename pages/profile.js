@@ -17,38 +17,16 @@ const Profile = () => {
 
 
     const handleDelete = (id) => {
-        // fetch(`https://bootcodedevlab.herokuapp.com/auth/${user}`)
-        //     .then(res => res.json())
-        //     .then(bootcodeAuthor => {
-
-        //         const token = window.localStorage.getItem('user');
-        //         const decryptedToken = token ? jwt.decode(token) : 'rien';
-        //         console.log('Mon user local :', decryptedToken.email)
-        //         console.log('Mon user remote :', user.email)
-        //         // bootcodeAuthor.email
-        //     })
-
-        // console.log('deletedId user', id, user._id)
-// `https://bootcodedevlab.herokuapp.com/publication/${id user}/${id publication}`
         fetch(`https://bootcodedevlab.herokuapp.com/publication/${user._id}/${id}`, {
             method: 'DELETE',
-            // mode: 'cors',
-            // headers: {
-            //     'Content-Type': 'application/json'
-            // },  
-            // body: JSON.stringify(id)
         })
         .then(() => location.reload()) 
         .catch(err => console.log('err', err))
 };
-
-
     useEffect(() => {
         // window.localStorage.getItem('user');
         const token = window.localStorage.getItem('user');
         const decryptedToken = token ? jwt.decode(token) : 'rien';
-        console.log('Mon user', decryptedToken)
-
         decryptedToken && fetch(`https://bootcodedevlab.herokuapp.com/publication/${decryptedToken._id}/post`)
             .then(res => res.json())
             .then(data => setUserPosts(data))
@@ -100,7 +78,7 @@ const Profile = () => {
                     </a>
                 </Link>
                 <button onClick={() => handleDelete(_id)} className={styles2.supprimer}>Supprimer</button>
-                <button onClick={() => console.log('modifier')} className={styles2.modifier}>Modifier</button>
+                <Link href={`/communitybootcode/edit/${_id}`}><button onClick={() => console.log('modifier')} className={styles2.modifier}>Modifier</button></Link>
             </div>
         )) : <h1>Chargement...</h1>}
 

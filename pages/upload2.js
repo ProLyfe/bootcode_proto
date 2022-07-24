@@ -27,21 +27,8 @@ const Upload = () => {
     
     const [isSuccess, setIsSuccess] = useState(false);
 
-
-    // const [isUploadPage, setIsUploadPage] = useState(false);
-
-    // const router = useRouter();
-    // console.log('router :', router.pathname)
-
-    // router.pathname === '/upload2' ? setIsUploadPage(true) : setIsUploadPage(false);
-
-    // console.log(router.pathname === '/upload2')
-
     const { setBootCodePreview, bootCodePreview } = useContext(BootCodeContext)
-    // console.log('testooooo :', contexto)
 
-    // console.log('NIVEDA :', useContext(BootCodeContext))
-    // console.log(' useContext(BootCodeContext) :',  useContext(BootCodeContext).bootCodePreview)
     const handleSelection = (order) => {
 
         if (order === 'first') {
@@ -128,7 +115,6 @@ const Upload = () => {
         const token = window.localStorage.getItem('user');
         const decryptedToken = token ? jwt.decode(token) : 'rien';
         const decryptedTokenId = decryptedToken._id
-        console.log('decryptedTokenId :', decryptedTokenId)
         fetch(`https://bootcodedevlab.herokuapp.com/publication/${decryptedTokenId}/post`, {
             method: 'POST',
             mode: 'cors',
@@ -137,8 +123,6 @@ const Upload = () => {
             },
             body: JSON.stringify(code)
         })
-        // .then(res => setIsSuccess(true));
-        // console.log(code)
     };
 
     const formatBootCode = () => {
@@ -147,15 +131,11 @@ const Upload = () => {
             css, 
             javascript,
         };
-        // console.log('bootCodeSended :', bootCodeSended)
         setBootCodePreview(bootCodeSended);
         localStorage.setItem("previewCode", bootCodeSended);
         localStorage.setItem("html", html);
         localStorage.setItem("css", css);
         localStorage.setItem("js", javascript);
-
-        console.log('Premier jet',html, css, javascript)
-        // console.log('yanny : ', bootCodePreview)
     };
 
     return (

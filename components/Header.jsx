@@ -21,9 +21,6 @@ const Header = () => {
     // const [isUploadPage, setIsUploadPage] = useState(false);
 
     const router = useRouter();
-    // console.log('router test:', router.pathname === '/upload2')
-
-    
   
     const toggleMenu = () => {
         setIsMenuToggled(prev => !prev);
@@ -47,7 +44,6 @@ const Header = () => {
         // setUser(decryptedToken)
         setDecryptedToken(decryptedToken)
         decryptedToken && setDecryptedTokenName(decryptedToken.username)
-        console.log('TU VEUX QUOI ?', decryptedToken)
     }, []);
 
 
@@ -56,14 +52,9 @@ const Header = () => {
             
             if (val.length !== 0) {
                 setFilteredSearchList(filteredResult);
-                console.log('plein')
             } else if (val.length === 0) {
                 setFilteredSearchList([])
-                console.log('vide')
-
             }
-            // console.log(val.length)
-
     };
 
     return (

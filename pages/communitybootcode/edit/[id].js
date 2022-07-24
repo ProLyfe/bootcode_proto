@@ -1,10 +1,11 @@
 import Header from "../../../components/Header";
-import styles from '../../../styles/bootcodepage.module.css';
+// import styles from '../../../styles/bootcodepage.module.css';
+import styles from '../../../styles/upload2.module.css';
 import Router from 'next/router';
 import jwt from 'jsonwebtoken';
 import Button from "../../../components/Button";
 import Head from 'next/head'
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 // import styles from '../../styles/upload2.module.css';
 import Link from 'next/link';
 import Confetti from 'react-confetti'
@@ -20,21 +21,8 @@ const BootCodeDetails = ({ data }) => {
     
     const [isSuccess, setIsSuccess] = useState(false);
 
-
-    // const [isUploadPage, setIsUploadPage] = useState(false);
-
-    // const router = useRouter();
-    // console.log('router :', router.pathname)
-
-    // router.pathname === '/upload2' ? setIsUploadPage(true) : setIsUploadPage(false);
-
-    // console.log(router.pathname === '/upload2')
-
     const { setBootCodePreview, bootCodePreview } = useContext(BootCodeContext)
-    // console.log('testooooo :', contexto)
 
-    // console.log('NIVEDA :', useContext(BootCodeContext))
-    // console.log(' useContext(BootCodeContext) :',  useContext(BootCodeContext).bootCodePreview)
     const handleSelection = (order) => {
 
         if (order === 'first') {
@@ -77,6 +65,14 @@ const BootCodeDetails = ({ data }) => {
     const tag4Style = tag4 ? { backgroundColor: '#2B2B2B', color: 'white' } : { backgroundColor: '#9390C1 '} 
     const tag5Style = tag5 ? { backgroundColor: '#2B2B2B', color: 'white' } : { backgroundColor: '#9390C1 '} 
 
+    useEffect(() => {
+        setHtml(data.html);
+        setCss(data.css);
+        setJavascript(data.javascript)
+        setTitle(data.title)
+    }, []);
+
+
     const handleTag1 = () => {
         setAddTag(prev => [...prev, 'MATERIAL']);
         setTag1(prevState => !prevState);
@@ -115,23 +111,23 @@ const BootCodeDetails = ({ data }) => {
             html,
             css,
             javascript,
-            tags: filteredTags
+            // tags: filteredTags
         };
 
         const token = window.localStorage.getItem('user');
         const decryptedToken = token ? jwt.decode(token) : 'rien';
         const decryptedTokenId = decryptedToken._id
-        console.log('decryptedTokenId :', decryptedTokenId)
-        fetch(`https://bootcodedevlab.herokuapp.com/publication/${decryptedTokenId}/post`, {
-            method: 'POST',
+        fetch(`https://bootcodedevlab.herokuapp.com/publication/${data._id}`, {
+            method: 'PUT',
             mode: 'cors',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(code)
         })
-        // .then(res => setIsSuccess(true));
-        // console.log(code)
+        .then(res => console.log('RESULT : ', code))
+        .then(res => setIsSuccess(true))
+        .catch(err => console.log('Err :', err))
     };
 
     const formatBootCode = () => {
@@ -140,18 +136,12 @@ const BootCodeDetails = ({ data }) => {
             css, 
             javascript,
         };
-        // console.log('bootCodeSended :', bootCodeSended)
         setBootCodePreview(bootCodeSended);
         localStorage.setItem("previewCode", bootCodeSended);
         localStorage.setItem("html", html);
         localStorage.setItem("css", css);
         localStorage.setItem("js", javascript);
-
-        console.log('Premier jet',html, css, javascript)
-        // console.log('yanny : ', bootCodePreview)
     };
-
-    console.log('YANNY A DIT : ', data);
 
     return (
         <div className={styles.container}>
@@ -160,7 +150,7 @@ const BootCodeDetails = ({ data }) => {
                 <link rel="icon" href="/favicon.ico" />
             </Head> 
             <Header />
-            <h1>Envoi du code</h1>
+            <h1>Éditer votre BootCode</h1>
             {/* <h1 className={styles.titlePage}>HOME</h1> */}
             <div className={styles.back} onClick={Router.back}><p className={styles.backPara}>Retour</p></div>
             
@@ -180,10 +170,11 @@ const BootCodeDetails = ({ data }) => {
                             style={{ height: '2.75rem' }} 
                             className={styles.customInput} 
                             placeholder='Donnez un nom à votre Bootcode'
+                            value={title}
                             onChange={e => setTitle(e.target.value)}
                         />
 
-                    <iframe style={{ backgroundColor: 'white'}} src={`./communitybootcode/frame/upload_preview`} title="description" scrolling="no" className={styles.iframe}></iframe>
+                    <iframe style={{ backgroundColor: 'white'}} src={`/communitybootcode/frame/upload_preview_edit`} title="description" scrolling="no" className={styles.iframe}></iframe>
 
                     {/* <h1 className={styles.desc}>Sélectionnez 3 catégories</h1> */}
                     <div className={styles.cardCategoriesContainer}>
@@ -208,11 +199,11 @@ const BootCodeDetails = ({ data }) => {
                             <div className={styles.langugage} style={{ backgroundColor: activated2 }} onClick={() => handleSelection('second')}>CSS</div>
                             <div className={styles.langugage} style={{ backgroundColor: activated3 }} onClick={() => handleSelection('third')}>JS</div>
                         </div>
-                        { isSelected ? <textarea className={styles.snippet} placeholder="Collez votre code HTML" defaultValue={data.html} onChange={e => {setHtml(() => e.target.value);}} onKeyUp={formatBootCode}></textarea>
+                        { isSelected ? <textarea className={styles.snippet} placeholder="Collez votre code HTML" value={html} onChange={e => {setHtml(() => e.target.value);}} onKeyUp={formatBootCode}></textarea>
 
-                        : isSelected2 ? <textarea className={styles.snippet} placeholder="Collez votre code CSS" defaultValue={data.css} onChange={e => {setCss(() => e.target.value);}} onKeyUp={formatBootCode}></textarea>
+                        : isSelected2 ? <textarea className={styles.snippet} placeholder="Collez votre code CSS" value={css} onChange={e => {setCss(() => e.target.value);}} onKeyUp={formatBootCode}></textarea>
 
-                        : <textarea className={styles.snippet} placeholder="Collez votre code JavaScript" defaultValue={data.javascript} onChange={e => {setJavascript(() => e.target.value);}} onKeyUp={formatBootCode}></textarea>
+                        : <textarea className={styles.snippet} placeholder="Collez votre code JavaScript" value={javascript} onChange={e => {setJavascript(() => e.target.value);}} onKeyUp={formatBootCode}></textarea>
                         }
                     </div>
                 </div>

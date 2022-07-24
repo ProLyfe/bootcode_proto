@@ -19,8 +19,6 @@ const BootCodeDetails = ({ data }) => {
     const [author, setAuthor] = useState('');
  
 
-    // console.log('data :', data)
-
     const handleSelection = (order) => {
 
         if (order === 'first') {
@@ -92,7 +90,6 @@ const BootCodeDetails = ({ data }) => {
         }).then(() => console.log('comment send')).catch(err => console.log(err));
     };
 
-    console.log('DATA :', data);
     return (
         <div className={styles.container}>
             <Header />
@@ -213,8 +210,7 @@ export async function getServerSideProps(context) {
 
     const res = await fetch(`https://bootcodedevlab.herokuapp.com/publication/${id}`);
     const data = await res.json();
-    // console.log('single data :', data)
- 
+
     return {
         props: {
             data: data

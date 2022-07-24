@@ -26,9 +26,7 @@ export default function Home() {
       // window.localStorage.getItem('user');
       const token = window.localStorage.getItem('user');
       const decryptedToken = token ? jwt.decode(token) : 'rien';
-      setUser(decryptedToken)
-      console.log('TU VEUX QUOI ', decryptedToken)
-
+      setUser(decryptedToken);
   }, []);
 
   useEffect(() => {

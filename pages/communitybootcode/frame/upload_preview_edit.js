@@ -2,7 +2,7 @@ import BootCodeComponent from "../../../components/BootCodeCommponent";
 import { useContext, useEffect, useState } from 'react';
 import { BootCodeContext } from '../../_app'; 
 
-const UploadPreview = ({ data }) => {
+const UploadPreviewEdit = ({ data }) => {
 
     const { bootCodePreview } = useContext(BootCodeContext)
     const [htmlCode, setHtmlCode] = useState();
@@ -41,5 +41,5 @@ const UploadPreview = ({ data }) => {
     );
 };
 
-export default UploadPreview;
+export default UploadPreviewEdit;
 

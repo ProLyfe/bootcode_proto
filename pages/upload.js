@@ -30,7 +30,6 @@ const Upload = () => {
         const token = window.localStorage.getItem('user');
         const decryptedToken = token ? jwt.decode(token) : 'rien';
         const decryptedTokenId = decryptedToken._id
-        console.log('decryptedTokenId :', decryptedTokenId)
         fetch(`https://bootcodedevlab.herokuapp.com/publication/${decryptedTokenId}/post`, {
             method: 'POST',
             mode: 'cors',
