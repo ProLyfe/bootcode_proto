@@ -13,7 +13,6 @@
 }
 
 .back {
-    /* background-color: red; */
     width: 100%;
     cursor: pointer;
 }
@@ -84,6 +83,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 1rem;
 }
 
 .cardCategorie {
@@ -152,14 +152,14 @@
 
 .commentButton {
     background-color: #9390C1;
-        border: none;
-        text-align: center;
-        /* padding: 2rem; */
-        width: 14rem;
-        height: 2.75rem;
-        color: white;
-        cursor: pointer;
-        font-family: 'Futura';
+    border: none;
+    text-align: center;
+    /* padding: 2rem; */
+    width: 14rem;
+    height: 2.75rem;
+    color: white;
+    cursor: pointer;
+    font-family: 'Futura';
 }
 
 .bootcodeContainer2 {

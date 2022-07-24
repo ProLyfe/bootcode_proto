@@ -35,6 +35,8 @@ export default function Home() {
       .then(data => setReceiveBootcodes(data));
   }, []);
 
+  receiveBootcodes && receiveBootcodes.forEach(el => console.log(el))
+
   return (
     <div className={styles.container}>
       <Header />
@@ -47,7 +49,7 @@ export default function Home() {
         <h1 className={styles.titlePage}>HOME</h1>
        <div className={styles.cardContainer}>
 
-        {receiveBootcodes ? receiveBootcodes.reverse().map(({ _id, creationDate, css, html, javascript, title, tags }) => (
+        {receiveBootcodes ? receiveBootcodes.reverse().map(({ _id, creationDate, css, html, javascript, title, tags, likes }) => (
           <Link href={`/communitybootcode/${_id}`} key={_id}>
             <a>
               <Card 
@@ -58,6 +60,7 @@ export default function Home() {
                 title={title}
                 _id={_id}
                 tags={tags}
+                likes={likes}
                 />
             </a>
           </Link>

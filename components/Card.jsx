@@ -1,6 +1,6 @@
 import styles from '../styles/card.module.css';
 
-const Card = ({ _id, creationDate, css, html, javascript, title, tags }) => {
+const Card = ({ _id, creationDate, css, html, javascript, title, tags, likes }) => {
 
     return (
         <div className={styles.card}>
@@ -25,6 +25,11 @@ const Card = ({ _id, creationDate, css, html, javascript, title, tags }) => {
                 <p className={styles.cardCategorie}>FLAT DESIGN</p> */}
                 {tags.map(tag => <p className={styles.cardCategorie} key={Math.random()}>{tag.toUpperCase()}</p>)}
             </div>
+            <div className={styles.cardCoeur}>
+            <img src="/coeur.png" className={styles.coeur}/> 
+            <p>{likes.length}</p>
+            </div>
+
         </div>
     );
 };

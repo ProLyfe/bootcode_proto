@@ -13,7 +13,19 @@
     font-family: 'Futura';
 }
 
+.coeur {
+    height: 1.5rem;
+    width: 1.5rem;
+}
 
+.cardCoeur {
+    display: flex;
+    /* background-color: red; */
+    align-items: center;
+    gap: .5rem;
+    font-size: 1.25rem;
+    height: 3rem;
+}
 
 .cardFrame {
     /* background-color: red; */

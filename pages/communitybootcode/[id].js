@@ -87,7 +87,7 @@ const BootCodeDetails = ({ data }) => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ message }),
-        }).then(() => console.log('comment send')).catch(err => console.log(err));
+        }).then(() => location.reload()).catch(err => console.log(err));
     };
 
     return (
