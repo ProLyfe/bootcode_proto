@@ -41,7 +41,7 @@ const BootCodeDetails = ({ data }) => {
     const activated2 = isSelected2 === true ? '#9390C1' : '#EAE8FB'
     const activated3 = isSelected3 === true ? '#9390C1' : '#EAE8FB'
 
-    const [decryptedTokenId, setDecryptedTokenId] = useState();
+    const [decryptedTokenId, setDecryptedTokenId] = useState('');
 
     useEffect(() => {
         const token = window.localStorage.getItem('user');
@@ -194,10 +194,12 @@ const BootCodeDetails = ({ data }) => {
                 </div>
             </div>
             
+            {decryptedTokenId ? 
             <div className={styles.bootcodeContainer2}>
                 <textarea className={styles.commentTextArea} placeholder="Envoyer un commentaire" onChange={e => setBootCodeComment(e.target.value)}></textarea>
                 <button className={styles.commentButton} onClick={() => handleComments(bootCodeComment, decryptedTokenId)}>Envoyer</button>
-            </div>
+            </div> : console.log('Not log')
+            }
         </div>
     );
 };
