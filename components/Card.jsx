@@ -27,7 +27,7 @@ const Card = ({ _id, creationDate, css, html, javascript, title, tags, likes }) 
             </div>
             <div className={styles.cardCoeur}>
             <img src="/coeur.png" className={styles.coeur}/> 
-            <p>{likes && likes.length}</p>
+            {/* <p>{likes && likes.length}</p> */}
             </div>
 
         </div>
