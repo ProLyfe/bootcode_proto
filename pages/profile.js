@@ -62,7 +62,7 @@ const Profile = () => {
 
         <div className={styles.cardContainer}>
         <Link href="/upload2"><a><AddCard /></a></Link>
-            {userPosts ? userPosts.map(({ _id, creationDate, css, html, javascript, title, tags }) => (
+            {userPosts ? userPosts.map(({ _id, creationDate, css, html, javascript, title, tags, likes }) => (
             <div className={styles2.cardAndSupprContainer} key={_id}>
                 <Link href={`/communitybootcode/${_id}`} key={_id}>
                     <a>
@@ -74,6 +74,7 @@ const Profile = () => {
                             title={title}
                             _id={_id}
                             tags={tags}
+                            likes={likes}
                             />
                     </a>
                 </Link>

@@ -21,15 +21,12 @@ const Card = ({ _id, creationDate, css, html, javascript, title, tags, likes }) 
             </div>
             <p className={styles.cardDesc}>{title}</p>
             <div className={styles.cardCategoriesContainer}>
-                {/* <p className={styles.cardCategorie}>NAV</p>
-                <p className={styles.cardCategorie}>FLAT DESIGN</p> */}
                 {tags.map(tag => <p className={styles.cardCategorie} key={Math.random()}>{tag.toUpperCase()}</p>)}
             </div>
             <div className={styles.cardCoeur}>
             <img src="/coeur.png" className={styles.coeur}/> 
-            {/* <p>{likes && likes.length}</p> */}
+            <p>{likes && likes.length}</p>
             </div>
-
         </div>
     );
 };
